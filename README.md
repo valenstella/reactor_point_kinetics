@@ -78,7 +78,7 @@ The comparison allows direct validation of the numerical model.
 
 ### Power Evolution for Different Reactivities
 
-![Reactor Kinetics](reactor_kinetics_reactivities.png)
+![Reactor Kinetics](reactor_kinetics.png)
 
 The simulations show the expected reactor response:
 
@@ -107,6 +107,17 @@ The maximum observed error was on the order of machine precision, demonstrating 
 
 ---
 
+## Verification and Validation
+
+The numerical solution obtained with SciPy's solve_ivp() solver was verified against the analytical solution of the governing equation.
+
+Excellent agreement was observed throughout the simulation interval.
+
+As the reactor power approached extremely small values, numerical round-off effects became noticeable, which is expected when approaching machine precision limits.
+
+The comparison confirmed the correctness of the numerical implementation.
+
+
 ## Engineering Interpretation
 
 Reactivity is one of the most important parameters in reactor operation and safety analysis.
@@ -116,6 +127,7 @@ This simplified model illustrates how even small reactivity variations can signi
 Although the model does not include delayed neutron precursor groups or feedback mechanisms, it captures the fundamental relationship between reactivity and power behavior and serves as an introduction to reactor dynamics simulations.
 
 ---
+
 
 ## Skills Demonstrated
 
