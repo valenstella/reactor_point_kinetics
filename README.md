@@ -78,7 +78,7 @@ The comparison allows direct validation of the numerical model.
 
 ### Power Evolution for Different Reactivities
 
-![Reactor Kinetics](reactor_kinetics.png)
+![Reactor Kinetics](reactor_kinetics_reactivities.png)
 
 The simulations show the expected reactor response:
 
