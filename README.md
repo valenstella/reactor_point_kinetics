@@ -2,19 +2,19 @@
 
 ## Objective
 
-This project implements a simplified point reactor kinetics model to study the effect of reactivity changes on reactor power.
+This project implements a simplified reactor point kinetics model to investigate the effect of reactivity on reactor power evolution.
 
-The objective is to understand the dynamic response of a nuclear reactor under subcritical, critical, and supercritical conditions using numerical methods in Python.
+The model solves the governing differential equation numerically and validates the results against the analytical solution.
 
 ---
 
 ## Physical Background
 
-Point kinetics is one of the fundamental models used in reactor physics to describe the time-dependent behavior of neutron population and reactor power.
+Reactor kinetics describes the time-dependent behavior of neutron population and reactor power.
 
-In this simplified model, delayed neutrons are represented through the effective delayed neutron fraction, and the reactor power evolution is governed by a first-order differential equation.
+In this simplified model, reactor power is represented using a single point variable and the dynamics are governed by the balance between reactivity and delayed neutron effects.
 
-The model allows investigation of how different reactivity insertions affect reactor behavior.
+The simulation explores how different reactivity insertions influence reactor behavior under subcritical and supercritical conditions.
 
 ---
 
@@ -26,7 +26,7 @@ dP/dt = ((ρ - β)/Λ) P
 
 where:
 
-- P = reactor power
+- P = normalized reactor power
 - ρ = reactivity
 - β = effective delayed neutron fraction
 - Λ = neutron generation time
@@ -39,24 +39,29 @@ where:
 |------------|------------|
 | β | 0.0065 |
 | Λ | 1 × 10⁻⁴ s |
-| Initial Power | 1 (normalized) |
+| Initial Power | 1.0 |
 
-The simulation evaluates several reactivity conditions:
+The model evaluates several reactivity values:
 
-| Case | Reactivity (ρ) |
+| Case | Reactivity |
 |--------|--------|
 | Subcritical | -0.002 |
 | Critical-like | 0.000 |
-| Slightly Supercritical | 0.002 |
+| Near Critical | 0.002 |
 | Higher Reactivity | 0.004 |
+| Supercritical | 0.008 |
 
 ---
 
 ## Methodology
 
-The governing differential equation was solved numerically using SciPy's `solve_ivp()` function.
+The governing ordinary differential equation was solved numerically using SciPy's `solve_ivp()` solver.
 
-The reactor response was simulated for different reactivity values and compared against the analytical solution of the governing equation.
+To verify the implementation, the numerical solution was compared with the analytical solution:
+
+P(t) = P₀ exp[((ρ - β)/Λ)t]
+
+The comparison allows direct validation of the numerical model.
 
 ---
 
@@ -73,39 +78,42 @@ The reactor response was simulated for different reactivity values and compared 
 
 ### Power Evolution for Different Reactivities
 
-![Reactor Kinetics](reactor_kinetics_reactivities.png)
+![Reactor Kinetics](reactor_kinetics.png)
 
-The simulations show the expected reactor behavior:
+The simulations show the expected reactor response:
 
-- Negative reactivity causes power reduction.
-- Zero reactivity maintains constant power.
-- Positive reactivity produces power growth.
-- Larger reactivity insertions result in faster power increases.
+- Negative reactivity leads to power reduction.
+- Reactivity values approaching β produce slower decay.
+- Positive reactivity above β results in power growth.
+- The reactor response is highly sensitive to small reactivity changes.
 
 ---
 
 ## Model Validation
 
-![Reactor Kinetics](reactor_kinetics.png)
+### Numerical vs Analytical Solution
 
-The analytical solution of the governing equation is:
+![Validation](validation.png)
 
-P(t) = P₀ exp[((ρ - β)/Λ)t]
+The numerical solution was compared against the analytical solution of the governing equation.
 
-The numerical solution obtained with SciPy was compared with the analytical expression and showed excellent agreement.
+Excellent agreement was observed throughout the simulation interval, confirming the correctness of the numerical implementation.
 
-This comparison validates the numerical implementation.
+### Error Analysis
 
+The absolute error between numerical and analytical solutions remained extremely small throughout the simulation.
+
+The maximum observed error was on the order of machine precision, demonstrating the accuracy of the solver for this problem.
 
 ---
 
 ## Engineering Interpretation
 
-Reactivity is one of the most important parameters in reactor operation and safety.
+Reactivity is one of the most important parameters in reactor operation and safety analysis.
 
-Small changes in reactivity can significantly affect reactor power and therefore fuel temperature, thermal margins, and overall reactor behavior.
+This simplified model illustrates how even small reactivity variations can significantly alter reactor power evolution.
 
-Although simplified, this model captures the essential relationship between reactivity and power evolution and provides insight into the dynamic response of nuclear systems.
+Although the model does not include delayed neutron precursor groups or feedback mechanisms, it captures the fundamental relationship between reactivity and power behavior and serves as an introduction to reactor dynamics simulations.
 
 ---
 
@@ -113,11 +121,11 @@ Although simplified, this model captures the essential relationship between reac
 
 - Reactor physics fundamentals
 - Point kinetics modeling
-- Ordinary differential equations (ODEs)
-- Numerical integration with SciPy
+- Numerical solution of ODEs
+- Model verification and validation
 - Scientific computing with Python
 - Data visualization
-- Engineering problem solving
+- Engineering analysis
 - Git and GitHub workflow
 
 ---
@@ -126,25 +134,25 @@ Although simplified, this model captures the essential relationship between reac
 
 Potential extensions include:
 
-- Delayed neutron precursor groups
-- Full point kinetics equations
-- Reactivity insertion accidents
+- Six-group delayed neutron model
+- Reactivity insertion transients
 - Temperature feedback effects
-- Xenon poisoning effects
+- Xenon poisoning simulations
 - Coupling with thermal-hydraulic models
-- Comparison with reactor transient benchmarks
+- Point kinetics benchmark comparisons
 
 ---
+
 
 ## Relevance to Nuclear Engineering
 
 Point kinetics models are widely used in:
 
-- Reactor startup analysis
+- Reactor startup studies
 - Reactivity management
-- Safety studies
-- Transient analysis
-- Nuclear operator training
+- Nuclear safety analysis
+- Transient simulations
+- Reactor operator training
 - Reactor dynamics education
 
-Understanding reactor kinetics is fundamental for nuclear engineers working in reactor operation, safety assessment, and reactor design.
+Understanding reactor kinetics is fundamental for nuclear engineers involved in reactor analysis, safety assessment, and reactor operation.
