@@ -136,19 +136,6 @@ Potential extensions include:
 
 ---
 
-## Repository Structure
-
-```text
-reactor-point-kinetics/
-│
-├── reactor_point_kinetics.ipynb
-├── README.md
-└── figures/
-    └── reactor_kinetics.png
-```
-
----
-
 ## Relevance to Nuclear Engineering
 
 Point kinetics models are widely used in:
